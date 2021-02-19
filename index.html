@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="" id="highScoreLink">go to highscores</a>
+        <h6>Time Left:</h6>
+        <p class="timer"></p>
+    </header>
+    <div class="buttonWrap" id="startWrap">
+        <button id="startButton">Start</button>
+    </div>
+    <main id="quizContainer">
+        <section class="screen" id="screen1">
+            <h4 class="question" id="question1">blah</h4>
+            <ul class="answers" id="ul1">
+                <li class="correctAnswer">blah</li>
+                <li class="incorrectAnswer">blah</li>
+                <li class="incorrectAnswer">blah</li>
+                <li class="incorrectAnswer">blah</li>
+                <li class="rightWrong">correct/incorrect</li>
+            </ul>
+        </section>
+    </main>
+    <figure id="highscoreScreen">
+        <ul id="highscoreList">
+            <li><h3 id="highscoreHeadline">highscores</h3></li>
+            <li>placeholder</li>
+        </ul>
+        <label for="initials">Enter your initials</label>
+        <input type="text" name="initials">
+        <div class="buttonWrap" id="submitWrap">
+            <button id="submitHighscore">Submit</button>
+        </div>
+    </figure>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
