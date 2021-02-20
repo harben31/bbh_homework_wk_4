@@ -33,6 +33,7 @@ var rightWrong = document.querySelector(".rightWrong");
 var figure = document.querySelector("figure");
 
 var gameOverBanner = document.querySelector("#gameOverBanner");
+var yourScore = document.querySelector("#yourScore");
 
 var highscoreList = document.querySelector("#highscoreList");
 var submitButton = document.querySelector("#submitButton");
@@ -55,6 +56,8 @@ document.addEventListener("click", function(event){
         timeLeft--;
         timer.innerHTML = timeLeft;
         //why does this only work in the interval?
+
+        //this is what happens at game over
         if(timeLeft<=0){
             clearInterval(countDown);
             timer.innerHTML = "Times Up!";
@@ -62,7 +65,7 @@ document.addEventListener("click", function(event){
             main.setAttribute("style", "display: none");
             figure.setAttribute("style", "display: flex");
             gameOverBanner.innerHTML = "GAME OVER!";
-
+            yourScore.innerHTML = "your score: " + score;
         }
     }, 1000)
 
@@ -72,12 +75,22 @@ document.addEventListener("click", function(event){
         timeLeft-=15;
 
     } else if (event.target.matches(".correctAnswer")){
-
         rightWrong.setAttribute("style", "display: block");
         rightWrong.innerHTML= "Correct";
         score += 10;
         console.log(score);
-    } 
+
+    } else if (event.target.matches("#submitButton")){
+        console.log(userInput.value);
+        localStorage.setItem("userInput", userInput.value);
+        localStorage.setItem("score", score);
+        var userScoreLi = document.createElement("li");
+        highscoreList.appendChild(userScoreLi);
+       //need to figure out the localeStoarge stuff and why the innerhtml for new li is in the console but does not render
+
+
+
+    }
     //add submit button functionality
 })
 
