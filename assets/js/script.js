@@ -69,29 +69,33 @@ document.addEventListener("click", function(event){
         }
     }, 1000)
 
+        //Correct Answer
     } else if(event.target.matches(".incorrectAnswer")) {
         rightWrong.setAttribute("style", "display: block");
         rightWrong.innerHTML= "Incorrect";
         timeLeft-=15;
 
+        //incorrect anser
     } else if (event.target.matches(".correctAnswer")){
         rightWrong.setAttribute("style", "display: block");
         rightWrong.innerHTML= "Correct";
         score += 10;
         console.log(score);
 
+        //submit button 
     } else if (event.target.matches("#submitButton")){
         console.log(userInput.value);
         localStorage.setItem("userInput", userInput.value);
         localStorage.setItem("score", score);
+
         var userScoreLi = document.createElement("li");
         highscoreList.appendChild(userScoreLi);
-       //need to figure out the localeStoarge stuff and why the innerhtml for new li is in the console but does not render
-
-
-
+        userScoreLi.setAttribute("style", "color: black;")
+        userScoreLi.innerHTML = userInput.value + ": " + score;
+       //need to figure out the localeStoarge stuff. in a funciton?
+        
     }
-    //add submit button functionality
+    //MAKE FIGURE FORM AND RESET DEFAULT
 })
 
 
