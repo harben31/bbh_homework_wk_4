@@ -15,7 +15,7 @@
 var header = document.querySelector("header");
 
 var timer = document.querySelector("#timer");
-var timeLeft = 3;
+var timeLeft = 30;
 var highscoreLink = document.querySelector("highscoreLink");
 
 var startButton = document.querySelector("#startButton");
@@ -41,11 +41,26 @@ var userInput = document.querySelector("#userInput");
 
 var score = 0;
 
+var screenIndex = 0;
 
 
-// lets try that event delegation method
+
+var screenChange = function(){
+    setTimeout(function(){
+        console.log(screenIndex);
+        main.children[screenIndex].setAttribute("style", "display: none");
+        screenIndex++;
+        console.log(screenIndex);
+        main.children[screenIndex].setAttribute("style", "display: flex");
+        console.log("NEXT!")
+    }, 1000)
+}
+
+
+
 document.addEventListener("click", function(event){
 
+    //start button
     if(event.target.matches("#startButton")){
         console.log("hello there");
         main.setAttribute("style", "display:flex");
@@ -74,13 +89,17 @@ document.addEventListener("click", function(event){
         rightWrong.setAttribute("style", "display: block");
         rightWrong.innerHTML= "Incorrect";
         timeLeft-=15;
+        screenChange();
 
-        //incorrect anser
+        //incorrect answer
     } else if (event.target.matches(".correctAnswer")){
         rightWrong.setAttribute("style", "display: block");
         rightWrong.innerHTML= "Correct";
+        //rightWrong only working on 1st screen. querySelectALl & itterate? 
         score += 10;
         console.log(score);
+        screenChange();
+    
 
         //submit button 
     } else if (event.target.matches("#submitButton")){
@@ -95,7 +114,7 @@ document.addEventListener("click", function(event){
        //need to figure out the localeStoarge stuff. in a funciton?
         
     }
-    //MAKE FIGURE FORM AND RESET DEFAULT
+    //MAKE FIGURE FORM AND RESET DEFAULT?
 })
 
 

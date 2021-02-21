@@ -65,6 +65,15 @@ main {
 /* .screen { 
 background:yellow;
 } */
+#screen2{
+    display:none;
+}
+#screen3{
+    display:none;
+}
+#screen4{
+    display:none;
+}
 
 .screen li {
     background: purple;

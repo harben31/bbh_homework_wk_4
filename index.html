@@ -21,7 +21,8 @@
         <button id="startButton">Start</button>
     </div>
     <main id="quizContainer">
-        <section class="screen" id="screen1">
+
+        <section class="screen" id="screen1" data-screenNumber = "1" data-state = "visable">
             <h4 class="question" id="question1">blah</h4>
             <ul class="answers" id="ul1">
                 <li class="answer correctAnswer">blah1</li>
@@ -31,6 +32,40 @@
                 <li class="rightWrong">correct/incorrect</li>
             </ul>
         </section>
+
+        <section class="screen" id="screen2" data-screenNumber = "2" data-state = "hidden">
+            <h4 class="question" id="question2">blah2</h4>
+            <ul class="answers" id="ul2">
+                <li class="answer correctAnswer">blah1</li>
+                <li class="answer incorrectAnswer">blah2</li>
+                <li class="answer incorrectAnswer">blah3</li>
+                <li class="answer incorrectAnswer">blah4</li>
+                <li class="rightWrong">correct/incorrect</li>
+            </ul>
+        </section>
+
+        <section class="screen" id="screen3" data-screenNumber = "3" data-state = "hidden">
+            <h4 class="question" id="question3">blah3</h4>
+            <ul class="answers" id="ul3">
+                <li class="answer correctAnswer">blah1</li>
+                <li class="answer incorrectAnswer">blah2</li>
+                <li class="answer incorrectAnswer">blah3</li>
+                <li class="answer incorrectAnswer">blah4</li>
+                <li class="rightWrong">correct/incorrect</li>
+            </ul>
+        </section>
+
+        <section class="screen" id="screen4" data-screenNumber = "4" data-state = "hidden">
+            <h4 class="question" id="question4">blah4</h4>
+            <ul class="answers" id="ul4">
+                <li class="answer correctAnswer">blah1</li>
+                <li class="answer incorrectAnswer">blah2</li>
+                <li class="answer incorrectAnswer">blah3</li>
+                <li class="answer incorrectAnswer">blah4</li>
+                <li class="rightWrong">correct/incorrect</li>
+            </ul>
+        </section>
+
     </main>
     <figure id="highscoreScreen">
         <hi id="gameOverBanner"></hi>
