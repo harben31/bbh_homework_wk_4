@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <a href="#highscoreScreen" id="highscoreLink">go to highscores</a>
+        <div id="timerWrapper">
+            <h6>Time Left:</h6>
+            <p id="timer"></p>
+        </div>
+    </header>
+    <div class="buttonWrap" id="startWrap">
+        <button id="startButton">Start</button>
+    </div>
+    <main id="quizContainer">
+
+        <section class="screen" id="screen1" data-screenNumber = "1">
+            <h4 class="question" id="question1">what does the colon seperate when defining an object?</h4>
+            <ul class="answers" id="ul1">
+                <li class="answer correctAnswer">key and value</li>
+                <li class="answer incorrectAnswer">key and peele</li>
+                <li class="answer incorrectAnswer">key and stone light</li>
+                <li class="answer incorrectAnswer">key and largo</li>
+                
+            </ul>
+        </section>
+
+        <section class="screen" id="screen2" data-screenNumber = "2">
+            <h4 class="question" id="question2">To create your own data attributes what must the word 'data' be followed with?</h4>
+            <ul class="answers" id="ul2">
+                <li class="answer incorrectAnswer">  =  </li>
+                <li class="answer incorrectAnswer">&#128076</li>
+                <li class="answer correctAnswer">  -  </li>
+                <li class="answer incorrectAnswer">  l337  </li>
+            </ul>
+        </section>
+
+        <section class="screen" id="screen3" data-screenNumber = "3">
+            <h4 class="question" id="question3">If you were a hotdog and you were starving would you eat yourself?</h4>
+            <ul class="answers" id="ul3">
+                <li class="answer incorrectAnswer">What is this?</li>
+                <li class="answer incorrectAnswer">This has nothing to do with coding</li>
+                <li class="answer correctAnswer">I know I would!</li>
+                <li class="answer incorrectAnswer">...is that a 25 year old SNL reference?</li>
+            </ul>
+        </section>
+
+        <section class="screen" id="screen4" data-screenNumber = "4">
+            <h4 class="question" id="question4">What encloses the statements of a function?</h4>
+            <ul class="answers" id="ul4">
+                <li class="answer incorrectAnswer">Square Brackets</li>
+                <li class="answer incorrectAnswer">cyclone fencing</li>
+                <li class="answer incorrectAnswer">Wavey brackets</li>
+                <li class="answer correctAnswer">Curley Brackets</li>
+            </ul>
+        </section>
+        <h3 id="rightWrong"></h3>
+    </main>
+    <figure id="highscoreScreen">
+        <hi id="gameOverBanner"></hi>
+        <h2 id="yourScore"></h2>
+        <h3 id="highscoreHeadline">highscores</h3>
+        <ul id="highscoreList">
+        </ul>
+        <label for="initials">Enter your initials</label>
+        <input id="userInput" type="text" name="initials">
+        <div class="buttonWrap" id="submitWrap">
+            <button id="submitButton">Submit</button>
+            <button id="clearButton">Clear Scores</button>
+        </div>
+    </figure>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
