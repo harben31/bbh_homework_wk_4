@@ -1,16 +1,20 @@
 //done
 //WHEN the start button is clicked 
 //THEN timer starts and first screen appears
-
-//TODO
-//WHEN a question is answer
-//THEN evaluates answer to see if it is correct and assign points and changes to next screen
-//WHEN all the questions have been answered or time runs out
-//THEN the highscore screen shows up and askes for initals
 //WHEN initals are entered and submitted
 //THEN the input value is paired with score value and stored in localstorage and displayed in the ul
+//WHEN a question is answered
+//THEN evaluates answer to see if it is correct and assign points and changes to next screen
+
+//TODO
+//WHEN all the questions have been answered or time runs out
+//THEN the highscore screen shows up and askes for initals
+//...almost done but still wierd stuff happening at last question
+
 //WHEN reset highscore is clicked 
 //THEN the localstorage is cleaned and score board is blank
+//WHEN the questions are rendered
+//THEN they are rendered in a random order each time
 //README
 
 //BONUS:
@@ -21,27 +25,19 @@
 
 //header elements
 var header = document.querySelector("header");
-
 var timer = document.querySelector("#timer");
-
-timer.textContent = timeLeft;
 var highscoreLink = document.querySelector("highscoreLink");
-
 var startButton = document.querySelector("#startButton");
 
-//screen elements
+//question elements
 var main = document.querySelector("main");
-// var screenAll = document.querySelector(".screen");
-
 var questionPlace = document.querySelector("#question");
 var a1 = document.querySelector("#a1");
 var a2 = document.querySelector("#a2");
 var a3 = document.querySelector("#a3");
 var a4 = document.querySelector("#a4");
 
-// var answer = document.querySelectorAll(".answer");
-// var correctAnswer = document.querySelector("#correctAnswer");
-// var incorrectAnswer = document.querySelector("#incorrectAnswer");
+
 var rightWrong = document.querySelector("#rightWrong");
 
 //highscore screen elements
@@ -50,138 +46,206 @@ var figure = document.querySelector("figure");
 var gameOverBanner = document.querySelector("#gameOverBanner");
 var yourScore = document.querySelector("#yourScore");
 
+
+var initialsBanner = document.querySelector("#initialsBanner");
 var highscoreList = document.querySelector("#highscoreList");
 var submitButton = document.querySelector("#submitButton");
 var clearButton = document.querySelector("#clearButton");
 var userInput = document.querySelector("#userInput");
+var playAgainButton = document.querySelector("#playAgainButton");
 
+var questions = [
+    {
+        text: "what does the colon seperate when defining an object?",
+        answers: [
+            {
+                text: "key and peele",
+                correct: false
+            },
+            {
+                text: "key and value",
+                correct: true
+            },
+            {
+                text: "key and stone light",
+                correct: false
+            },
+            {
+                text: "key and largo",
+                correct: false
+            }
+        ]
+    },
 
+    {
+        text: "To create your own data attributes what must the word 'data' be followed with?",
+        answers: [
+            {
+                text: "&#128076",
+                correct: false
+            },
+            {
+                text: "  =  ",
+                correct: false
+            },
+            {
+                text: "  l337  ",
+                correct: false
+            },
+            {
+                text:  "  -  ",
+                correct: true
+            }
+        ]
+    },
 
-var question1 = {
-    question: "what does the colon seperate when defining an object?",
-    correctAnswer: "key and value",
-    incorrectAnswer1: "key and peele",
-    incorrectAnswer2: "key and stone light",
-    incorrectAnswer3: "key and largo",  
-};
-var question2 = {
-    question: "To create your own data attributes what must the word 'data' be followed with?",
-    correctAnswer: "  -  ",
-    incorrectAnswer1: "&#128076",
-    incorrectAnswer2: "  =  ",
-    incorrectAnswer3: "  l337  ",
-};
+    {
+        text: "If you were a hotdog and you were starving would you eat yourself?",
+        answers: [
+            {
+                text: "What is this?",
+                correct: false
+            },
+            {
+                text: "This has nothing to do with coding",
+                correct: false
+            },
+            {
+                text:  "I know I would!",
+                correct: true
+            },
+            {
+                text: "...is that a 25 year old SNL reference?",
+                correct: false
+            }
+        ]
+    },
 
-var question3 = {
-    question: "If you were a hotdog and you were starving would you eat yourself?",
-    correctAnswer: "I know I would!",
-    incorrectAnswer1: "What is this?",
-    incorrectAnswer2: "This has nothing to do with coding",
-    incorrectAnswer3: "...is that a 25 year old SNL reference?",
-};
-
-var question4 = {
-    question: "What encloses the statements of a function?",
-    correctAnswer: "Curley Brackets",
-    incorrectAnswer1: "Square Brackets",
-    incorrectAnswer2: "Wavey brackets",
-    incorrectAnswer3: "cyclone fencing",
-};
-
-var qaOut = {
-    question:"",
-    correctAnswer:"",
-    incorrectAnswer1:"",
-    incorrectAnswer2: "",
-    incorrectAnswer3: "",
-}
-
-var qaArray = [question1, question2, question3, question4, qaOut];
+    {
+        text: "What encloses the statements of a function?",
+        answers: [
+            {
+                text: "Square Brackets",
+                correct: false
+            },
+            {
+                text:  "Curley Brackets",
+                correct: true
+            },
+            {
+                text: "Wavey brackets",
+                correct: false
+            },
+            {
+                text: "cyclone fencing",
+                correct: false
+            }
+        ]
+    },
+]
 
 var answerPlaceArray = [a1, a2, a3, a4];
-
-var answerRandomArray = [];
 
 var score = 0;
 
 var qaIndex = 0;
 
-var timeLeft = 300;
+var timeLeft = 600;
+timer.textContent = timeLeft;
 
-var x=0;
+var scoreArray = JSON.parse(localStorage.getItem("scoreName"))||[];
 
-var randomIndex;
-
-var shuffle = function(){
-
-}
+var index = 0;
 
 var qaChange = function(){
-    //generate a question. 
-    questionPlace.innerHTML = qaArray[qaIndex].question;
-    var answerArray = [qaArray[qaIndex].incorrectAnswer1, qaArray[qaIndex].incorrectAnswer2, qaArray[qaIndex].incorrectAnswer3, qaArray[qaIndex].correctAnswer ];
-    
-    // should be be placed randomly
-    
-    for (i=0; i<answerArray.length; i++){
-        answerPlaceArray[i].innerHTML = answerArray[i];
+    if(qaIndex===questions.length){
+        return
     }
+
+    //render a question. 
+    questionPlace.innerHTML = questions[qaIndex].text;
     
-    // incrementing here makes it wierd
-    // qaIndex++;
+    //fill in coresponding answers 
+    for (i=0; i<questions[qaIndex].answers.length; i++){
+        answerPlaceArray[i].innerHTML = questions[qaIndex].answers[i].text;
+        answerPlaceArray[i].setAttribute("data-correct", questions[qaIndex].answers[i].correct)
+    }
 };
 
 var rightWrongDisplay = function(event){
-    
-    console.log(event.target.textContent);
 
-        //------------right answer------------------
-        if(event.target.textContent === qaArray[qaIndex].correctAnswer){
-            console.log("Right");
-            rightWrong.setAttribute("style", "display: block");
-            rightWrong.innerHTML= "Correct";
-            score++;
-            setTimeout(function(){
-                rightWrong.setAttribute("style", "display: none");
-            }, 500);
-            
-            //--------------wrong answer----------------
-        } else {
-            rightWrong.setAttribute("style", "display: block");
-            rightWrong.innerHTML= "Incorrect";
-            timeLeft += -15;
-            console.log("Wrong!")
-            setTimeout(function(){
-                rightWrong.setAttribute("style", "display: none");
-            }, 500);
-            
-        }
-    console.log(qaArray[qaIndex].correctAnswer);
+    //------------right answer------------------
+    console.log(score);
+    if(event.target.dataset.correct === "true"){
+        console.log("qaIndex:" + qaIndex);
+        rightWrong.setAttribute("style", "display: block");
+        rightWrong.innerHTML= "Correct";
+        score+=10;
+        setTimeout(function(){
+            rightWrong.setAttribute("style", "display: none");
+        }, 500);
+        
+        //--------------wrong answer----------------
+    } else {
+        console.log("qaIndex:" + qaIndex);
+        rightWrong.setAttribute("style", "display: block");
+        rightWrong.innerHTML= "Incorrect";
+        timeLeft += -15;
+        // console.log("Wrong!")
+        setTimeout(function(){
+            rightWrong.setAttribute("style", "display: none");
+        }, 500);   
+    }
 }
 
+
+//------------score handling-------------
 var storeScores = function(){
     var scoreName = {
         scoreOb: score,
         initialsOb: userInput.value
-    }
-
-    localStorage.setItem("scoreName", JSON.stringify(scoreName));
+    };
+    scoreArray.push(scoreName);
+    localStorage.setItem("scoreName", JSON.stringify(scoreArray));
 }
 
 var renderScores = function(){
-    var userScoreLi = document.createElement("li");
-    highscoreList.appendChild(userScoreLi);
-    userScoreLi.setAttribute("style", "color: black; width: 300px; text-align: center; background: lightgray;");
+    if(localStorage.getItem("scoreName")===null){
+        return
+    }
 
-    var lastScore = JSON.parse(localStorage.getItem("scoreName"));
-    userScoreLi.innerHTML = lastScore.initialsOb + ": " + lastScore.scoreOb;
+    scoreArray.sort(function(a, b){
+        return b.scoreOb - a.scoreOb
+    });
+   
+    scoreArray.forEach(function(score){
+        var userScoreLi = document.createElement("li");
+        index++;
+        userScoreLi.setAttribute("style", "color: black; width: 300px; text-align: center; background: lightgray;");
+        highscoreList.appendChild(userScoreLi);
+        userScoreLi.textContent = index + ". " + score.initialsOb + ": " + score.scoreOb;
+    });
+        figure.setAttribute("style", "display: flex");
+        playAgainButton.setAttribute("style", "display: block");
+
+        header.setAttribute("style", "display: none");
+        startButton.setAttribute("style", "display: none");
+        main.setAttribute("style", "display: none");
+        gameOverBanner.setAttribute("style", "display: none");
+        initialsBanner.setAttribute("style", "display: none");
+        yourScore.setAttribute("style", "display: none");
+        userInput.setAttribute("style", "display: none");
+        submitButton.setAttribute("style", "display: none");
+        clearButton.setAttribute("style", "display: none");
+        
 }
 
 
-
+//--------------buttons functionality-------------
 document.addEventListener('click', function(event){
         console.log(qaIndex);
     //----------start button-----------
+    console.log("qaIndex:" + qaIndex);
     if(event.target.matches("#startButton")){
         qaChange();
         main.setAttribute("style", "display:flex");
@@ -193,9 +257,9 @@ document.addEventListener('click', function(event){
             timer.textContent = timeLeft;
 
             //------------game over------------
-            if(timeLeft <= 0 || qaIndex>qaArray.length -1){
+            if(timeLeft <= 0 || qaIndex===questions.length){
                 clearInterval(countDown);
-                renderScores(); 
+                // renderScores(); 
                 timer.innerHTML = "gameOver!";
                 //goes to submit initials screen
                 main.setAttribute("style", "display: none");
@@ -207,23 +271,31 @@ document.addEventListener('click', function(event){
 
         //--------------answer buttons------------
     } else if (event.target.matches(".answer")){
-        qaChange();
         rightWrongDisplay(event);
         qaIndex++;
-        console.log(qaIndex);
-        
-
+        qaChange();
 
         //------------submit button----------------
     } else if (event.target.matches("#submitButton")){
+        var x=0;
         x++;
-        console.log(userInput.value);
         storeScores();
-        
-        var userScoreLi2 = document.createElement("li");
-        highscoreList.appendChild(userScoreLi2);
-        userScoreLi2.setAttribute("style", "color: black; width: 300px; text-align: center; background: lightgray;");
-        userScoreLi2.setAttribute("id", "scoreli" + x);
-        userScoreLi2.innerHTML = userInput.value + ": " + score;
-    };
+        renderScores();
+        userInput.value = "";
+
+        //---------------reset scores button------------
+    } else if (event.target.matches("#clearButton")){
+        localStorage.clear();
+        for(i=0; i<highscoreList.childNodes.length; i++){
+            highscoreList.remove(highscoreList.childNodes[i]);
+        }
+
+        //---------go to highscores button-----------
+    } else if (event.target.matches("#highscoreLink")){
+        renderScores();
+
+    //------------play again button------------------
+    } else if (event.target.matches("#playAgainButton")){
+        location.reload();
+    }
 })

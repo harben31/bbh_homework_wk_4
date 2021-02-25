@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Document</title>
+    <title>Quiz: on coding</title>
 </head>
 <body>
     <header>
-        <a href="#highscoreScreen" id="highscoreLink">go to highscores</a>
+        <p id="highscoreLink">go to highscores</p>
         <div id="timerWrapper">
             <h6>Time Left:</h6>
             <p id="timer"></p>
@@ -41,11 +41,12 @@
         <h3 id="highscoreHeadline">highscores</h3>
         <ul id="highscoreList">
         </ul>
-        <label for="initials">Enter your initials</label>
+        <label for="initials" id="initialsBanner">Enter your initials</label>
         <input id="userInput" type="text" name="initials">
         <div class="buttonWrap" id="submitWrap">
             <button id="submitButton">Submit</button>
             <button id="clearButton">Clear Scores</button>
+            <button id="playAgainButton">Play Again</button>
         </div>
     </figure>
     <script src="./assets/js/script.js"></script>
