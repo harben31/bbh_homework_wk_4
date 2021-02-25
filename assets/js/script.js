@@ -26,7 +26,7 @@
 //header elements
 var header = document.querySelector("header");
 var timer = document.querySelector("#timer");
-var highscoreLink = document.querySelector("highscoreLink");
+var highscoreLink = document.querySelector("#highscoreLink");
 var startButton = document.querySelector("#startButton");
 
 //question elements
@@ -150,7 +150,7 @@ var score = 0;
 
 var qaIndex = 0;
 
-var timeLeft = 600;
+var timeLeft = 60;
 timer.textContent = timeLeft;
 
 var scoreArray = JSON.parse(localStorage.getItem("scoreName"))||[];
@@ -182,7 +182,7 @@ var rightWrongDisplay = function(event){
         rightWrong.innerHTML= "Correct";
         score+=10;
         setTimeout(function(){
-            rightWrong.setAttribute("style", "display: none");
+            rightWrong.setAttribute("style", "display: none;");
         }, 500);
         
         //--------------wrong answer----------------
@@ -211,6 +211,11 @@ var storeScores = function(){
 
 var renderScores = function(){
     if(localStorage.getItem("scoreName")===null){
+        console.log(highscoreLink);
+        highscoreLink.innerHTML = "no scores yet, play a round and put on in there pardner"
+        setTimeout(function(){
+            highscoreLink.textContent = "go to highscore"
+        }, 2000);
         return
     }
 
@@ -227,6 +232,7 @@ var renderScores = function(){
     });
         figure.setAttribute("style", "display: flex");
         playAgainButton.setAttribute("style", "display: block");
+        clearButton.setAttribute("style", "display: block");
 
         header.setAttribute("style", "display: none");
         startButton.setAttribute("style", "display: none");
@@ -236,7 +242,6 @@ var renderScores = function(){
         yourScore.setAttribute("style", "display: none");
         userInput.setAttribute("style", "display: none");
         submitButton.setAttribute("style", "display: none");
-        clearButton.setAttribute("style", "display: none");
         
 }
 

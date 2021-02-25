@@ -85,10 +85,12 @@ main {
 #rightWrong {
     background:unset;
     border-bottom:2px solid rgb(150, 150, 150);
+    bottom: 30%;
     color: rgb(150, 150, 150);
     display: none;
     font-size: 1.5rem;
     font-style: italic;
+    position: absolute;
 }
 
 
@@ -97,9 +99,6 @@ main {
     cursor: pointer;
 }
 
-/* li.rightWrong:hover{
-    background: unset;
-} */
 
 figure{
     align-items: flex-end;
@@ -135,6 +134,10 @@ figure{
     font-size: 2rem;
     margin-bottom: 50px;
     margin-top: 200px;
+}
+
+#clearButton{
+    display:none;
 }
 
 #submitWrap{
